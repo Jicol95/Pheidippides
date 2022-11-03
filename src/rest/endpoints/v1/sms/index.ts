@@ -1,5 +1,5 @@
 import { Handler } from "express"
-import { Endpoint } from "../../../../app"
+import { Endpoint } from "../../../../app/pheidippides-server"
 
 const smsHandler: Handler = (req, res) => {
     res.status(200)

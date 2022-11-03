@@ -1,19 +1,17 @@
-import express, { Express } from 'express'
-import { PheidippidesApp } from '../'
+import { PheidippidesServer } from '../pheidippides-server'
 import { Configuration } from '../../configuration'
 
 export class PheidippidesAppBuilder {
-    private readonly app: Express
-    private readonly configuration: Configuration
+    constructor(private config: Configuration) {}
+    public static inject = ['config'] as const;
+
     private host: string | undefined
     private port: number
-
-    constructor() {
-        this.configuration = new Configuration()
-    }
+    private usingConfigMan: boolean = false
 
     useConfigMan(): PheidippidesAppBuilder {
-        this.configuration.initializeConfigMan()
+        this.usingConfigMan = true
+        this.config.initializeConfigMan()
         return this
     }
 
@@ -27,8 +25,13 @@ export class PheidippidesAppBuilder {
         return this
     }
 
-    async build(): Promise<PheidippidesApp> {
-        await this.configuration.ready
-        return new PheidippidesApp(this.host ?? this.configuration.host, this.port ?? this.configuration.port, this.configuration)
+    async build(): Promise<PheidippidesServer> {
+       if (this.usingConfigMan) {
+           await this.config.ready
+           return new PheidippidesServer(this.host ?? this.config.host, this.port ?? this.config.port)
+
+       }
+
+        return new PheidippidesServer(this.host ?? 'localhost', this.port ?? 8080)
     }
 }

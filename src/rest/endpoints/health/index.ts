@@ -1,6 +1,6 @@
 import { Handler } from "express"
 import * as moment from 'moment'
-import { Endpoint } from "../../../app"
+import { Endpoint } from "../../../app/pheidippides-server"
 import { HealthMetrics } from "../../dto/health-metrics"
 
 const healthHandler: Handler = (_, res) => {
