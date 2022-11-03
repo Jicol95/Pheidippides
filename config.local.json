@@ -1,0 +1,11 @@
+{
+	"app": {
+		"host": "localhost",
+		"port": 8080
+	},
+	"twilio": {
+		"sid": "potato",
+		"token": "potato",
+		"phoneNumber": "potato"
+	}
+}

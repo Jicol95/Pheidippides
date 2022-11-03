@@ -1,0 +1,9 @@
+{
+    "schema": [
+        {"key": "app.host", "type": "string"},
+        {"key": "app.port", "type": "number"},
+        {"key": "twilio.sid", "type": "string"},
+        {"key": "twilio.token", "type": "string"},
+        {"key": "twilio.phoneNumber", "type": "string"}
+    ]
+}
