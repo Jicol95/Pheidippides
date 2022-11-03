@@ -8,8 +8,12 @@ export class Configuration {
         return configMan.ready
     }
 
-    public get host() {
+    public get host(): string {
         return configMan.get('app.host')
+    }
+
+    public get port(): number {
+        return configMan.get('app.port')
     }
 
     public async initializeConfigMan() {

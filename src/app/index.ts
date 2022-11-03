@@ -19,7 +19,10 @@ export class PheidippidesApp {
     }
 
     public async listen() {
-        return this.express.listen(this.port, this.host, () => console.log(
+        return this.express.listen(
+            this.port,
+            this.host,
+            () => console.log(
                     `Server started at ${this.host}:${this.port} with ${this.configuration.nodeEnv} env vars`
                 )
         )

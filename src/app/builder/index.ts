@@ -29,6 +29,6 @@ export class PheidippidesAppBuilder {
 
     async build(): Promise<PheidippidesApp> {
         await this.configuration.ready
-        return new PheidippidesApp(this.host ?? this.configuration.host, this.port, this.configuration)
+        return new PheidippidesApp(this.host ?? this.configuration.host, this.port ?? this.configuration.port, this.configuration)
     }
 }
