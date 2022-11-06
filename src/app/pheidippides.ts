@@ -1,9 +1,8 @@
-import express, { Express, Handler } from 'express'
 import { createInjector, Injector, Scope } from 'typed-inject';
 import { Configuration } from '../configuration';
-import { PheidippidesAppBuilder } from './builder';
-import healthEndpoint from '../rest/endpoints/health'
-import smsEndpoint from '../rest/endpoints/v1/sms'
+import { PheidippidesAppBuilder } from './builder/pheidippides-app-builder';
+import smsEndpoint from '../rest/v1/resources/sms'
+import healthEndpoint from '../rest/health'
 
 export class Pheidippides {
     private appInjector: Injector<{config: Configuration, "app-builder": PheidippidesAppBuilder}>;
