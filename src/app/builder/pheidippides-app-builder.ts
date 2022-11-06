@@ -38,6 +38,6 @@ export class PheidippidesAppBuilder {
             return new PheidippidesServer(this.config.host ?? this.host, this.config.port ?? this.port, router, this.baseUrl)
         }
 
-            return new PheidippidesServer(this.host, this.port, router, this.baseUrl)
+        return new PheidippidesServer(this.host, this.port, router, this.baseUrl)
     }
 }
