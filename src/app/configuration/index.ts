@@ -18,7 +18,7 @@ export class Configuration {
 
     public async initializeConfigMan() {
         configMan.init({
-            cwd: path.join(__dirname, '../'),
+            cwd: path.join(__dirname, '../../'),
             allowUnknown: false,
             removeUnknown: false,
             configs: [

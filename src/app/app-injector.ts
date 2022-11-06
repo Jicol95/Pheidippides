@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { createInjector, Injector, Scope } from "typed-inject";
-import { Configuration } from "../configuration";
+import { Configuration } from "./configuration";
 import { router } from "../core/decorators/controller";
 import { HealthResource } from "../rest/health-resource";
 import { PheidippidesAppBuilder } from "./builder/pheidippides-app-builder";

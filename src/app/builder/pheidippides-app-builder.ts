@@ -1,5 +1,5 @@
 import { PheidippidesServer } from '../pheidippides-server'
-import { Configuration } from '../../configuration'
+import { Configuration } from '../configuration'
 import { router } from '../../core/decorators/controller';
 
 export class PheidippidesAppBuilder {
