@@ -15,9 +15,13 @@ export class Pheidippides {
     public async run() {
         const builder = this.appInjector.injectClass(PheidippidesAppBuilder)
         
-        const server = await builder.useConfigMan().build()
-        server.createEndpoint(healthEndpoint)
-        server.createEndpoint(smsEndpoint)
+        const server = await builder
+            .useEndpoint(healthEndpoint)
+            .useEndpoint(smsEndpoint)
+            .useConfigMan()
+            .build()
+
+            
         await server.listen()
     }
 

@@ -1,18 +1,18 @@
 import express, { Express, Handler } from 'express'
-import { Configuration } from '../configuration'
 
 export class PheidippidesServer {
     private readonly express: Express
     private readonly port: number
     private readonly host: string
     
-    constructor(host: string, port: number) {
+    constructor(host: string, port: number, endpoints: Endpoint[]) {
         this.express = express()
         this.host = host
         this.port = port
+        endpoints.forEach(it => this.createEndpoint(it))
     }
 
-    public createEndpoint(endpoint: Endpoint) {
+    private createEndpoint(endpoint: Endpoint) {
         this.express[endpoint.httpVerb](endpoint.route, endpoint.handler)
     }
 
