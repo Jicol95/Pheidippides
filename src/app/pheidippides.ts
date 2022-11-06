@@ -9,6 +9,7 @@ export class Pheidippides {
         
         const server = await builder
             .useConfigMan()
+            .useBaseUrl('/rest')
             .build()
 
         await server.listen()

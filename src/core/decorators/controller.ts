@@ -12,8 +12,6 @@ export const Controller = (prefix: string): ClassDecorator => {
             Reflect.defineMetadata('routes', [], target);
         }
         const routes: Array<ResourceEndpoint> = Reflect.getMetadata('routes', target)
-        console.log(prefix)
-        console.log(routes)
         const instance: any = appInjector.injectClass(target)
         routes.forEach((route: ResourceEndpoint) => {
             console.debug('Registered route ', { path: `${prefix}${route.path}`, method: route.methodName, controller: target.name })

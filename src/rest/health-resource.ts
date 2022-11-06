@@ -4,7 +4,7 @@ import { Controller } from "../core/decorators/controller";
 import { Get } from "../core/decorators/router";
 import { HealthMetrics } from "./dto/health-metrics";
 
-@Controller('/rest/health')
+@Controller('/health')
 export class HealthResource {
     @Get()
     public getHealthStatus(_: Request, res: Response) {

@@ -5,10 +5,9 @@ export class PheidippidesServer {
     private readonly port: number
     private readonly host: string
     
-    constructor(host: string, port: number, router: Router) {
-        console.log(router)
+    constructor(host: string, port: number, router: Router, baseUrl: string) {
         this.express = express()
-        this.express.use(router)
+        this.express.use(baseUrl, router)
         this.host = host
         this.port = port
     }

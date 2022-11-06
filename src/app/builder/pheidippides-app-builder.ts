@@ -1,15 +1,15 @@
 import { PheidippidesServer } from '../pheidippides-server'
 import { Configuration } from '../../configuration'
 import { router } from '../../core/decorators/controller';
-import { Router } from 'express';
 
 export class PheidippidesAppBuilder {
     constructor(private config: Configuration) {}
     public static inject = ['config'] as const;
 
-    private host: string | undefined
-    private port: number
+    private host: string = 'localhost'
+    private port: number = 8080
     private usingConfigMan: boolean = false
+    private baseUrl: string = ''
 
     useConfigMan(): PheidippidesAppBuilder {
         this.usingConfigMan = true
@@ -27,12 +27,17 @@ export class PheidippidesAppBuilder {
         return this
     }
 
-    async build(): Promise<PheidippidesServer> {
-       if (this.usingConfigMan) {
-           await this.config.ready
-           return new PheidippidesServer(this.host ?? this.config.host, this.port ?? this.config.port, router)
-       }
+    useBaseUrl(baseUrl: string): PheidippidesAppBuilder {
+        this.baseUrl = baseUrl
+        return this
+    }
 
-        return new PheidippidesServer(this.host ?? 'localhost', this.port ?? 8080, router)
+    async build(): Promise<PheidippidesServer> {
+        if (this.usingConfigMan) {
+            await this.config.ready
+            return new PheidippidesServer(this.config.host ?? this.host, this.config.port ?? this.port, router, this.baseUrl)
+        }
+
+            return new PheidippidesServer(this.host, this.port, router, this.baseUrl)
     }
 }
