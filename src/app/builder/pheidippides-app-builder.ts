@@ -1,5 +1,7 @@
-import { Endpoint, PheidippidesServer } from '../pheidippides-server'
+import { PheidippidesServer } from '../pheidippides-server'
 import { Configuration } from '../../configuration'
+import { router } from '../../core/decorators/controller';
+import { Router } from 'express';
 
 export class PheidippidesAppBuilder {
     constructor(private config: Configuration) {}
@@ -8,7 +10,6 @@ export class PheidippidesAppBuilder {
     private host: string | undefined
     private port: number
     private usingConfigMan: boolean = false
-    private endpoints: Endpoint[] = []
 
     useConfigMan(): PheidippidesAppBuilder {
         this.usingConfigMan = true
@@ -26,17 +27,12 @@ export class PheidippidesAppBuilder {
         return this
     }
 
-    useEndpoint(endpoint: Endpoint) {
-        this.endpoints.push(endpoint)
-        return this
-    }
-
     async build(): Promise<PheidippidesServer> {
        if (this.usingConfigMan) {
            await this.config.ready
-           return new PheidippidesServer(this.host ?? this.config.host, this.port ?? this.config.port, this.endpoints)
+           return new PheidippidesServer(this.host ?? this.config.host, this.port ?? this.config.port, router)
        }
 
-        return new PheidippidesServer(this.host ?? 'localhost', this.port ?? 8080, this.endpoints)
+        return new PheidippidesServer(this.host ?? 'localhost', this.port ?? 8080, router)
     }
 }
